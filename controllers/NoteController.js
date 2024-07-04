@@ -22,8 +22,9 @@ const NoteController = {
 
   async readNote(req, res) {
     try {
-      const notas = await Notes.find()
-      res.status(200).send(notas)
+      const notas = await Notes.find().select('Notas')
+      const response = notas.map((nota) => nota.Notas)
+      res.status(200).send(response)
     } catch (error) {
       error500()
     }
